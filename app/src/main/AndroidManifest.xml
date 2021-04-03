@@ -11,10 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.androidnc.btl_h2dmusic.Activity.HomeActivity"></activity>
-        <activity android:name="com.androidnc.btl_h2dmusic.Activity.PlayNhacActivity" />
-        <activity android:name="com.androidnc.btl_h2dmusic.Activity.DanhsachbaihatActivity" />
-        <activity android:name="com.androidnc.btl_h2dmusic.Activity.MainActivity">
+        <activity android:name=".Activity.CommentActivity"></activity>
+        <activity android:name=".Activity.HomeActivity" />
+        <activity android:name=".Activity.PlayNhacActivity" />
+        <activity android:name=".Activity.DanhsachbaihatActivity" />
+        <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

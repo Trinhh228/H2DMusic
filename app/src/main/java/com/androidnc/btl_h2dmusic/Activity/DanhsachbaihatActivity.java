@@ -134,6 +134,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             }
         });
     }
+
     private void GetDataBangXepHang(String id) {
         Dataservice dataservice = APIService.getService();
         Call<List<BaiHat>> callback = dataservice.GetDanhsachbaihatbangxephang(id);
@@ -145,10 +146,8 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
                 recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
             }
-
             @Override
             public void onFailure(Call<List<BaiHat>> call, Throwable t) {
-
             }
         });
     }
@@ -163,10 +162,8 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
                 recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
             }
-
             @Override
             public void onFailure(Call<List<BaiHat>> call, Throwable t) {
-
             }
         });
     }
@@ -199,10 +196,8 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
                 recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
             }
-
             @Override
             public void onFailure(Call<List<BaiHat>> call, Throwable t) {
-
             }
         });
     }
@@ -217,10 +212,8 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
                 recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
             }
-
             @Override
             public void onFailure(Call<List<BaiHat>> call, Throwable t) {
-
             }
         });
     }
@@ -233,7 +226,6 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         imgdanhsachcakhuc = findViewById(R.id.imageviewdanhsachcakhuc);
         floatingActionButton = findViewById(R.id.floatingactionbutton);
         txtcollapsing = findViewById(R.id.textViewcollapsing);
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitleTextColor(Color.WHITE);

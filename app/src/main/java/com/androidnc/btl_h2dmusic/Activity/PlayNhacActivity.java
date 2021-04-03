@@ -3,6 +3,7 @@ package com.androidnc.btl_h2dmusic.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -31,11 +32,12 @@ import java.util.Random;
 
 public class PlayNhacActivity extends AppCompatActivity {
     //private CircleLineVisualizer mVisualizer;
+    Context context;
     private MediaPlayer mediaPlayer;
     androidx.appcompat.widget.Toolbar toolbarplaynhac;
     SeekBar seekBarnhac;
     ImageView imageViewtim,imageViewshare;
-    TextView textViewtennhac, textViewcasi, textViewrunrime, textViewtatoltime;
+    TextView textViewtennhac, textViewcasi, textViewrunrime, textViewtatoltime, xemBinhluan;
     ImageButton imageButtontronnhac, imageButtonpreviewnhac, imageButtonplaypausenhac, imageButtonnexnhac,
     imageButtonlapnhac;
     ViewPager viewPagerplaynhac;
@@ -71,6 +73,15 @@ public class PlayNhacActivity extends AppCompatActivity {
                     imageViewtim.setImageResource(R.drawable.iconlove);
                     dem--;
                 }
+            }
+        });
+        xemBinhluan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String id = mangbaihat.get(position).getIdBaiHat();
+                Intent intent = new Intent(context, CommentActivity.class);
+                intent.putExtra("idbaihat",id);
+                context.startActivity(intent);
             }
         });
     }
@@ -279,7 +290,7 @@ public class PlayNhacActivity extends AppCompatActivity {
         textViewcasi = findViewById(R.id.textViewtencasiplaynhac);
         textViewtennhac = findViewById(R.id.textViewtenbaihatplaynhac);
         textViewrunrime = findViewById(R.id.textViewruntime);
-
+        xemBinhluan = findViewById(R.id.textViewCmt);
         fragment_dia_nhac = new Fragment_dia_nhac();
         adapternhac = new ViewPagerDiaNhac(getSupportFragmentManager());
         adapternhac.AddFragment(fragment_dia_nhac);
