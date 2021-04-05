@@ -66,12 +66,24 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewtenbaihatplaynhac" />
 
     <ImageView
-        android:id="@+id/imageViewtimplaynhac"
+        android:id="@+id/imageViewshare"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
+        android:src="@drawable/facebookicon"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewtenbaihatplaynhac" />
+
+    <ImageView
+        android:id="@+id/imageViewtimplaynhac"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="80dp"
         android:background="@drawable/iconlove"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"

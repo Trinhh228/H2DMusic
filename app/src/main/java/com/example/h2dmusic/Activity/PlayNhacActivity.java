@@ -3,10 +3,14 @@ package com.example.h2dmusic.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,6 +27,8 @@ import com.example.h2dmusic.Adapter.ViewPagerDiaNhac;
 import com.example.h2dmusic.Fragment.Fragment_dia_nhac;
 import com.example.h2dmusic.Model.BaiHat;
 import com.example.h2dmusic.R;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -34,7 +40,7 @@ public class PlayNhacActivity extends AppCompatActivity {
     private MediaPlayer mediaPlayer;
     androidx.appcompat.widget.Toolbar toolbarplaynhac;
     SeekBar seekBarnhac;
-    ImageView imageViewtim;
+    ImageView imageViewtim, share;
     TextView textViewtennhac, textViewcasi, textViewrunrime, textViewtatoltime;
     ImageButton imageButtontronnhac, imageButtonpreviewnhac, imageButtonplaypausenhac, imageButtonnexnhac,
     imageButtonlapnhac;
@@ -48,6 +54,10 @@ public class PlayNhacActivity extends AppCompatActivity {
 
     Fragment_dia_nhac fragment_dia_nhac;
     public static ViewPagerDiaNhac adapternhac;
+
+    ShareDialog shareDialog;
+    ShareLinkContent shareLinkContent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +83,21 @@ public class PlayNhacActivity extends AppCompatActivity {
                 }
             }
         });
+        //Share fb
+//        shareDialog = new ShareDialog(PlayNhacActivity.this);
+//        share.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(ShareDialog.canShow(ShareLinkContent.class)){
+//                    shareLinkContent = new ShareLinkContent.Builder()
+//                            .setContentTitle(mangbaihat.get(position).getTenBaiHat())
+//                            .setContentDescription(mangbaihat.get(position).getTenCaSi())
+//                            .setContentUrl(Uri.parse(mangbaihat.get(position).getLinkBaiHat()))
+//                            .build();
+//                }
+//                shareDialog.show(shareLinkContent);
+//            }
+//        });
     }
 
     private void enventClick() {
@@ -278,6 +303,7 @@ public class PlayNhacActivity extends AppCompatActivity {
         textViewcasi = findViewById(R.id.textViewtencasiplaynhac);
         textViewtennhac = findViewById(R.id.textViewtenbaihatplaynhac);
         textViewrunrime = findViewById(R.id.textViewruntime);
+        share = findViewById(R.id.imageViewshare);
 
         fragment_dia_nhac = new Fragment_dia_nhac();
         adapternhac = new ViewPagerDiaNhac(getSupportFragmentManager());

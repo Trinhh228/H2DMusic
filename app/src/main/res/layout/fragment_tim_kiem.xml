@@ -30,7 +30,6 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewtimkiem"
-        android:background="@drawable/bgrtimkiem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/appbarlayouttimkiem"
