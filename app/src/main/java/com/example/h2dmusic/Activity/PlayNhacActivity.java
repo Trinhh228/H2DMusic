@@ -40,10 +40,10 @@ public class PlayNhacActivity extends AppCompatActivity {
     private MediaPlayer mediaPlayer;
     androidx.appcompat.widget.Toolbar toolbarplaynhac;
     SeekBar seekBarnhac;
-    ImageView imageViewtim, share;
+    ImageView imageViewtim;
     TextView textViewtennhac, textViewcasi, textViewrunrime, textViewtatoltime;
     ImageButton imageButtontronnhac, imageButtonpreviewnhac, imageButtonplaypausenhac, imageButtonnexnhac,
-    imageButtonlapnhac;
+    imageButtonlapnhac, share;
     ViewPager viewPagerplaynhac;
     int dem = 0;
     int position = 0;
@@ -83,7 +83,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                 }
             }
         });
-        //Share fb
+//       // Share fb
 //        shareDialog = new ShareDialog(PlayNhacActivity.this);
 //        share.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -303,7 +303,7 @@ public class PlayNhacActivity extends AppCompatActivity {
         textViewcasi = findViewById(R.id.textViewtencasiplaynhac);
         textViewtennhac = findViewById(R.id.textViewtenbaihatplaynhac);
         textViewrunrime = findViewById(R.id.textViewruntime);
-        share = findViewById(R.id.imageViewshare);
+        share = findViewById(R.id.imageBtnshare);
 
         fragment_dia_nhac = new Fragment_dia_nhac();
         adapternhac = new ViewPagerDiaNhac(getSupportFragmentManager());
