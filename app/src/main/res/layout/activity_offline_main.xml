@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".Activity.OfflineMainActivity">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayouttv"
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
@@ -16,10 +18,8 @@
         app:tabTextColor="@color/colorAccent"
         app:tabIndicatorHeight="45dp"
         app:tabIndicatorColor="#1D7169"/>
-
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPagertv"
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent"/>
 </LinearLayout>

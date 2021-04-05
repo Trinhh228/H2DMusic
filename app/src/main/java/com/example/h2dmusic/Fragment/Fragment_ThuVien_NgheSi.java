@@ -1,9 +1,12 @@
 package com.example.h2dmusic.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,8 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.h2dmusic.Adapter.NgheSiAdapter;
+import com.example.h2dmusic.Adapter.PlaylistAdapter;
 import com.example.h2dmusic.Adapter.ThuVienNgheSiAdapter;
 import com.example.h2dmusic.Model.NgheSi;
+import com.example.h2dmusic.Model.Playlist;
 import com.example.h2dmusic.R;
 import com.example.h2dmusic.Service.APIService;
 import com.example.h2dmusic.Service.Dataservice;

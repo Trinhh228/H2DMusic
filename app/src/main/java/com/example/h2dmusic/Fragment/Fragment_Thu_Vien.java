@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.h2dmusic.Adapter.MainViewPagerAdapter;
 import com.example.h2dmusic.Adapter.ViewPagerThuVien;
 import com.example.h2dmusic.R;
 import com.google.android.material.tabs.TabLayout;

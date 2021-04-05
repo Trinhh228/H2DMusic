@@ -10,8 +10,8 @@
         android:id="@+id/linearlayout"
         android:orientation="vertical">
         <fragment
-            android:name="com.example.h2dmusic.Fragment.Fragment_Playlist"
-            android:id="@+id/fragmentplaylist"
+            android:name="com.example.h2dmusic.Fragment.Fragment_PhoBien"
+            android:id="@+id/fragmentphobien"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </fragment>
@@ -26,10 +26,11 @@
             android:id="@+id/fragmentthinhhanh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
         </fragment>
         <fragment
-            android:name="com.example.h2dmusic.Fragment.Fragment_PhoBien"
-            android:id="@+id/fragmentphobien"
+            android:name="com.example.h2dmusic.Fragment.Fragment_Playlist"
+            android:id="@+id/fragmentplaylist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </fragment>
@@ -39,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </fragment>
+
 
     </LinearLayout>
 
