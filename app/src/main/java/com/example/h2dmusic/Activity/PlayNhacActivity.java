@@ -3,14 +3,11 @@ package com.example.h2dmusic.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,21 +19,32 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.h2dmusic.Adapter.ViewPagerDiaNhac;
 import com.example.h2dmusic.Fragment.Fragment_dia_nhac;
 import com.example.h2dmusic.Model.BaiHat;
 import com.example.h2dmusic.R;
+import com.example.h2dmusic.Service.APIService;
+import com.example.h2dmusic.Service.Dataservice;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class PlayNhacActivity extends AppCompatActivity {
-    //private CircleLineVisualizer mVisualizer;
+
+
+//region     /*Khai báo biến*/
+
     private MediaPlayer mediaPlayer;
     androidx.appcompat.widget.Toolbar toolbarplaynhac;
     SeekBar seekBarnhac;
@@ -58,6 +66,9 @@ public class PlayNhacActivity extends AppCompatActivity {
     ShareDialog shareDialog;
     ShareLinkContent shareLinkContent;
 
+    NotificationManager notificationManager;
+    boolean isPlaying = false;
+//endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,20 +80,38 @@ public class PlayNhacActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         enventClick();
+
+//region        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+//            createChannel();
+//            registerReceiver(broadcastReceiver,new IntentFilter("TRACKS_TRACKS"));
+//            startService(new Intent(getBaseContext(), OnClearFromRecentServive.class));
+//endregion       }
+
         imageViewtim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (dem == 0){
-                    Animation animation = AnimationUtils.loadAnimation(PlayNhacActivity.this, R.anim.anim_timclick);
-                    imageViewtim.setImageResource(R.drawable.iconloved);
-                    view.startAnimation(animation);
-                    dem++;
-                }else {
-                    imageViewtim.setImageResource(R.drawable.iconlove);
-                    dem--;
-                }
+                String id = mangbaihat.get(position).getIdBaiHat();
+                imageViewtim.setImageResource(R.drawable.iconloved);
+                Dataservice dataservice = APIService.getService();
+                Call<String> callback = dataservice.Updateluotthich("1",id);
+                callback.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        String ketqua = response.body();
+                        if(ketqua.equals("Success")){
+                            Toast.makeText(PlayNhacActivity.this, "Ok", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(PlayNhacActivity.this, "Đã thích", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                    }
+                });
             }
         });
+//region Error
 //       // Share fb
 //        shareDialog = new ShareDialog(PlayNhacActivity.this);
 //        share.setOnClickListener(new View.OnClickListener() {
@@ -98,8 +127,88 @@ public class PlayNhacActivity extends AppCompatActivity {
 //                shareDialog.show(shareLinkContent);
 //            }
 //        });
+//endregion
     }
-
+    //region Error
+//
+//    private void createChannel() {
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+//            NotificationChannel channel = new NotificationChannel(CreateNotificationAdapter.CHANNEL_ID,
+//                    "KOD Dev", NotificationManager.IMPORTANCE_LOW);
+//
+//            notificationManager = getSystemService(NotificationManager.class);
+//            if(notificationManager != null){
+//                notificationManager.createNotificationChannel(channel);
+//            }
+//        }
+//    }
+//
+//    private void popluateBaihat(){
+//        tracks = new ArrayList<>();
+//
+//        tracks.add(new Tracks("Track1","Artist1",R.drawable.ic_haha));
+//        tracks.add(new Tracks("Track2","Artist2",R.drawable.ic_thuongthuong));
+//        tracks.add(new Tracks("Track3","Artist3",R.drawable.ic_hoa));
+//        tracks.add(new Tracks("Track4","Artist4",R.drawable.ic_wow));
+//    }
+//    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            String action = intent.getExtras().getString("actionname");
+//
+//            switch (action){
+//                case  CreateNotificationAdapter.ACTIONPREVIOUS:
+//                    onTrackPrevious();
+//                    break;
+//                case CreateNotificationAdapter.ACTIONPLAY:
+//                    if(isPlaying){
+//                        onTrackPause();
+//                    }
+//                    else {
+//                        onTrackPlay();
+//                    }
+//                    break;
+//                case  CreateNotificationAdapter.ACTIONNEXT:
+//                    onTrackNext();
+//                    break;
+//            }
+//        }
+//    };
+//
+//    @Override
+//    public void onTrackPrevious() {
+//        position--;
+//        CreateNotificationAdapter.createNotification(PlayNhacActivity.this,tracks.get(position),R.drawable.iconpause,position,tracks.size() -1);
+//    }
+//
+//    @Override
+//    public void onTrackPause() {
+//        CreateNotificationAdapter.createNotification(PlayNhacActivity.this,tracks.get(position),R.drawable.iconplay,position,tracks.size() -1);
+//        isPlaying = false;
+//    }
+//
+//    @Override
+//    public void onTrackPlay() {
+//        CreateNotificationAdapter.createNotification(PlayNhacActivity.this,tracks.get(position),R.drawable.iconpause,position,tracks.size() -1);
+//        isPlaying = true;
+//    }
+//
+//    @Override
+//    public void onTrackNext() {
+//        position++;
+//        CreateNotificationAdapter.createNotification(PlayNhacActivity.this,tracks.get(position),R.drawable.iconpause,position,tracks.size() -1);
+//    }
+//
+//    protected void onDestroy(){
+//        super.onDestroy();
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+//            notificationManager.cancelAll();
+//        }
+//        unregisterReceiver(broadcastReceiver);
+//    }
+//endregion
+    /*Vùng các nút điều khiển*/
+//region control
     private void enventClick() {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -118,9 +227,11 @@ public class PlayNhacActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (mediaPlayer.isPlaying()){
                     mediaPlayer.pause();
+                    isPlaying =false;
                     imageButtonplaypausenhac.setImageResource(R.drawable.nutpause);
                 }else {
                     mediaPlayer.start();
+                    isPlaying = true;
                     imageButtonplaypausenhac.setImageResource(R.drawable.nutplay);
                 }
             }
@@ -179,6 +290,8 @@ public class PlayNhacActivity extends AppCompatActivity {
                 mediaPlayer.seekTo(seekBar.getProgress());
             }
         });
+
+
         imageButtonnexnhac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -271,7 +384,7 @@ public class PlayNhacActivity extends AppCompatActivity {
             }
         });
     }
-
+//endregion
     private void GetDataFromIntent() {
         Intent intent = getIntent();
         mangbaihat.clear();
@@ -329,6 +442,7 @@ public class PlayNhacActivity extends AppCompatActivity {
         });
 
     }
+
     class playMP3 extends AsyncTask<String, Void, String>{
 
         @Override
@@ -364,6 +478,7 @@ public class PlayNhacActivity extends AppCompatActivity {
             }*/
         }
     }
+
     private void TimeSong(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
         textViewtatoltime.setText(simpleDateFormat.format(mediaPlayer.getDuration()));
@@ -371,6 +486,7 @@ public class PlayNhacActivity extends AppCompatActivity {
         textViewtennhac.setText(mangbaihat.get(position).getTenBaiHat());
         textViewcasi.setText(mangbaihat.get(position).getTenCaSi());
     }
+
     private void UpdateTime(){
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
